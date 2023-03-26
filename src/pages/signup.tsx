@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 
 export default function Home() {
+  const clientID = process.env.GITHUB_CLIENTID;
   return (
     <>
       <Head>
@@ -10,7 +11,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main />
+      <main>
+        <a href={`https://github.com/login/oauth/authorize?client_id=${clientID}&amp;scope=read:user%20read:discussion&amp;redirect_uri=http://localhost:3000/api/oauth/github_redirect`}>
+          Connect to github
+        </a>
+      </main>
     </>
   );
 }
