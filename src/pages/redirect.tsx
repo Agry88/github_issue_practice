@@ -7,7 +7,7 @@ export default function RedirectPage({ acessToken }: { acessToken: string }) {
   const router = useRouter();
 
   useEffect(() => {
-    localStorage.setItem('acessToken', acessToken);
+    localStorage.setItem('accessToken', acessToken);
     router.push('/mainpage');
   }, [acessToken, router]);
 
