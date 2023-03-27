@@ -10,10 +10,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     },
   });
 
-  const { name, avatar_url: avatarURL } = await githubLoginResponse.json();
+  const { login: name, avatar_url: avatarURL, id } = await githubLoginResponse.json();
+
   const user: User = {
     name,
     avatarURL,
+    id,
   };
 
   res.status(200).json({ user });
