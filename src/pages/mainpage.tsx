@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
-import useUser from '@/hooks/useUser';
 import useIssue from '@/hooks/useIssue';
+import { UserContext } from '@/provider/userProvider';
 
 export default function Mainpage() {
-  const { user } = useUser();
   const { issueList } = useIssue();
-  console.log(user);
+  const userData = useContext(UserContext);
   console.log(issueList);
+  console.log('provider');
+  console.log(userData);
 
   return (
     <>
