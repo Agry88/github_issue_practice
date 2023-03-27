@@ -3,6 +3,7 @@ import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
 import { UserContext } from '@/provider/userProvider';
 import Navbar from '@/components/Navbar';
+import IssueCard from '@/components/Card/issueCard';
 
 export default function Mainpage() {
   const { issueList } = useIssue();
@@ -17,8 +18,9 @@ export default function Mainpage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <main>
-        Hello welcome to main page
+      {/* gonna remove this when production finished IssueCard style */}
+      <main className="h-[1000px]">
+        <IssueCard />
       </main>
     </>
   );
