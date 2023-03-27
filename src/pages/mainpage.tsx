@@ -1,9 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-// import { User } from '@/types/user';
+import useUser from '@/hooks/useUser';
 
 export default function Mainpage() {
-  // const [user, setUser] = useState<User>();
+  const { user } = useUser();
+  console.log(user);
 
   return (
     <>
@@ -19,23 +20,3 @@ export default function Mainpage() {
     </>
   );
 }
-
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-//  const { acessToken } = context.query;
-//  const formattedAcessToken = typeof (acessToken) === 'string' ? acessToken : '';
-//  if (formattedAcessToken === '') {
-//    return {
-//      redirect: {
-//        destination: '/',
-//        permanent: false,
-//      },
-//    };
-//  }
-//  const userData = await handleLogin(formattedAcessToken);
-
-//  return {
-//    props: {
-//      userData,
-//    },
-//  };
-// }
