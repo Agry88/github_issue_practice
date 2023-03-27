@@ -5,11 +5,16 @@ async function getListIssue(): Promise<Issue[]> {
   const response = await fetch('https://api.github.com/repos/Agry88/github_issue_practice/issues');
   const data = await response.json();
 
-  const issueList = data.map((issue: any) => ({
-    id: issue.id,
+  const issueList: Issue[] = data.map((issue: any) => ({
+    issueId: issue.id,
     title: issue.title,
     body: issue.body,
-    tag: issue.state,
+    tag: {
+      tagId: issue.labels[0].id,
+      tagName: issue.labels[0].name,
+      tagColor: issue.labels[0].color,
+    },
+    creatorId: issue.user.id,
     creatorName: issue.user.login,
     creatorAvatar: issue.user.avatar_url,
   }));

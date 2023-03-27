@@ -1,10 +1,15 @@
-export type IssueTag = 'Open' | 'In progress' | 'Done';
+export type IssueTag = {
+  tagId: number;
+  tagName: string;
+  tagColor: string;
+};
 
 export type Issue = {
-  id: number;
+  issueId: number;
   title: string;
   body: string;
   tag: IssueTag;
+  creatorId: number;
   creatorName: string;
   creatorAvatar: string;
 };
