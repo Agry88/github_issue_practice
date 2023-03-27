@@ -1,5 +1,9 @@
 {
-  "extends": ["next/core-web-vitals","airbnb","airbnb-typescript"],
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaFeatures": {
@@ -8,16 +12,32 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "ignorePatterns": ["next.config.js"],
+  "ignorePatterns": [
+    "*.config.js"
+  ],
   "rules": {
     "no-console": "off",
     "react/no-unused-prop-types": "off",
-    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
+    "react/no-unknown-property": [
+      "error",
+      {
+        "ignore": [
+          "css"
+        ]
+      }
+    ],
     "react/require-default-props": "off",
-    "jsx-a11y/anchor-is-valid": [ "error", {
-      "components": [ "Link" ],
-      "specialLink": [ "to" ]
-      }],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": [
+          "Link"
+        ],
+        "specialLink": [
+          "to"
+        ]
+      }
+    ],
     "react/jsx-props-no-spreading": "off"
   }
 }
