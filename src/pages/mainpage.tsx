@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import handleLogin from '@/helpers/handleLogin';
-import { User } from '@/types/user';
-import { GetServerSidePropsContext } from 'next';
+// import { User } from '@/types/user';
 
-export default function Mainpage({ userData }: { userData: User }) {
-  const [user, setUser] = useState<User>(userData);
-
-  console.log(user);
+export default function Mainpage() {
+  // const [user, setUser] = useState<User>();
 
   return (
     <>
@@ -24,22 +20,22 @@ export default function Mainpage({ userData }: { userData: User }) {
   );
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { acessToken } = context.query;
-  const formattedAcessToken = typeof (acessToken) === 'string' ? acessToken : '';
-  if (formattedAcessToken === '') {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-  const userData = await handleLogin(formattedAcessToken);
+// export async function getServerSideProps(context: GetServerSidePropsContext) {
+//  const { acessToken } = context.query;
+//  const formattedAcessToken = typeof (acessToken) === 'string' ? acessToken : '';
+//  if (formattedAcessToken === '') {
+//    return {
+//      redirect: {
+//        destination: '/',
+//        permanent: false,
+//      },
+//    };
+//  }
+//  const userData = await handleLogin(formattedAcessToken);
 
-  return {
-    props: {
-      userData,
-    },
-  };
-}
+//  return {
+//    props: {
+//      userData,
+//    },
+//  };
+// }

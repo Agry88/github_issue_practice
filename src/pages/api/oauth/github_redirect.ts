@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
     const { access_token: accessToken } = await response.json();
-    res.redirect(`/mainpage?acessToken=${accessToken}`);
+    res.redirect(`/redirect?acessToken=${accessToken}`);
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: 'Server error' });
