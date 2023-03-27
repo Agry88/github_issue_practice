@@ -14,9 +14,9 @@ export default function useUser(): UseUser {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const router = useRouter();
-  const formattedAcessToken = localStorage.getItem('accessToken') ?? '';
 
   useEffect(() => {
+    const formattedAcessToken = localStorage.getItem('accessToken') ?? '';
     if (formattedAcessToken === '') {
       router.push('/');
     }
@@ -30,7 +30,7 @@ export default function useUser(): UseUser {
       }
     };
     handleAsyncLogin();
-  }, [formattedAcessToken, router]);
+  }, [router]);
 
   return {
     user: userData,

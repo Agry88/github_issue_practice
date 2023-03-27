@@ -1,10 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
 import useUser from '@/hooks/useUser';
+import useIssue from '@/hooks/useIssue';
 
 export default function Mainpage() {
   const { user } = useUser();
+  const { issueList } = useIssue();
   console.log(user);
+  console.log(issueList);
 
   return (
     <>
