@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
 import { UserContext } from '@/provider/userProvider';
+import Navbar from '@/components/Navbar';
 
 export default function Mainpage() {
   const { issueList } = useIssue();
   const userData = useContext(UserContext);
-  console.log(issueList);
-  console.log('provider');
-  console.log(userData);
 
   return (
     <>
@@ -18,6 +16,7 @@ export default function Mainpage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <main>
         Hello welcome to main page
       </main>
