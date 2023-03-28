@@ -11,11 +11,11 @@ export default function IssueCard({ classNames }: CardProps) {
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
 
   return (
-    <Card classNames={`${classNames ?? ''}h-40 bg-blue-50`}>
+    <Card classNames={`${classNames ?? ''}h-fit bg-blue-50`}>
 
-      <div className="flex flex-row justify-between w-full">
+      <div className="flex flex-row justify-between w-full h-fit">
         <div>
-          <button onClick={() => setisTagDropdownShow(true)} className="inline-block text-gray-500 hover:text-gray-50 hover:bg-gray-500 rounded-lg text-sm p-1.5" type="button">
+          <button onClick={() => setisTagDropdownShow(true)} className="w-20 inline-block text-gray-500 hover:text-gray-50 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm p-1.5" type="button">
             Tag
           </button>
           <Dropdown isShow={isTagDropdownShow} setIsShow={setisTagDropdownShow}>
@@ -34,7 +34,7 @@ export default function IssueCard({ classNames }: CardProps) {
         </div>
 
         <div>
-          <button onClick={() => setIsOptionDropdownShow(true)} className="inline-block text-gray-500 hover:text-gray-50 hover:bg-gray-500 rounded-lg text-sm p-1.5" type="button">
+          <button onClick={() => setIsOptionDropdownShow(true)} className="inline-block text-gray-500 hover:text-gray-50 hover:bg-gray-300 rounded-lg text-sm p-1.5" type="button">
             <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
           </button>
           <Dropdown isShow={isOptionDropdownShow} setIsShow={setIsOptionDropdownShow}>
@@ -51,13 +51,15 @@ export default function IssueCard({ classNames }: CardProps) {
       </div>
 
       <div className="w-full h-full">
-        <div className="flex flex-row">
+        <div className="flex flex-row items-center">
           <circle className="w-10 h-10 bg-gray-200 rounded-full" />
-          <span className="ml-2">Title</span>
+          <span className="ml-2 font-sans text-xl font-semibold tracking-normal text-left">Title</span>
         </div>
 
         <div className="w-full h-full">
-          <span>body here</span>
+          <span className="font-sans text-base font-semibold tracking-normal text-left break-all">
+            body hjsadasodiajsodijasoidjaoisjdoaisjdoiajsioereasasu
+          </span>
         </div>
       </div>
 
