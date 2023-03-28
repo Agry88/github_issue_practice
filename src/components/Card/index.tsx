@@ -17,11 +17,11 @@ export default function Card({ children, classNames }: CardProps) {
     'py-5',
     'w-80',
     'h-80',
-    'shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]',
     'rounded-xl',
+    'border-2',
+    'border-slate-50',
     ...customClassNames,
   ];
-
   return (
     <div className={listClassNames.join(' ')}>
       {children}

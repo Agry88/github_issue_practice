@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
+import { Issue } from '@/types/issue';
+import Image from 'next/image';
 import Card from './index';
 import Dropdown from '../Dropdown/Dropdown';
 
 type CardProps = {
+  issue: Issue
   classNames?: String
 };
 
-export default function IssueCard({ classNames }: CardProps) {
+const dropdownItem = [
+  'Open',
+  'In Progress',
+  'Done',
+];
+
+export default function IssueCard({ issue, classNames }: CardProps) {
   const [isTagDropdownShow, setisTagDropdownShow] = useState<boolean>(false);
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
 
   return (
-    <Card classNames={`${classNames ?? ''}h-fit bg-blue-50`}>
+    <Card classNames={`${classNames ?? ''}w-[20vw] min-w-[350px] h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}>
 
       <div className="flex flex-row justify-between w-full h-fit">
         <div>
@@ -20,15 +29,11 @@ export default function IssueCard({ classNames }: CardProps) {
           </button>
           <Dropdown isShow={isTagDropdownShow} setIsShow={setisTagDropdownShow}>
             <Dropdown.List>
-              <Dropdown.Item>
-                Open
-              </Dropdown.Item>
-              <Dropdown.Item>
-                In progress
-              </Dropdown.Item>
-              <Dropdown.Item>
-                Closed
-              </Dropdown.Item>
+              {dropdownItem.map((item) => (
+                <Dropdown.Item key={item}>
+                  {item}
+                </Dropdown.Item>
+              ))}
             </Dropdown.List>
           </Dropdown>
         </div>
@@ -52,13 +57,18 @@ export default function IssueCard({ classNames }: CardProps) {
 
       <div className="w-full h-full">
         <div className="flex flex-row items-center">
-          <circle className="w-10 h-10 bg-gray-200 rounded-full" />
-          <span className="ml-2 font-sans text-xl font-semibold tracking-normal text-left">Title</span>
+          <div className="w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
+            <Image src={issue.creatorAvatar} alt={issue.creatorName} width={50} height={50} />
+          </div>
+
+          <span className="ml-2 font-sans text-xl font-semibold tracking-normal text-left">
+            {issue.title}
+          </span>
         </div>
 
         <div className="w-full h-full">
           <span className="font-sans text-base font-semibold tracking-normal text-left break-all">
-            body hjsadasodiajsodijasoidjaoisjdoaisjdoiajsioereasasu
+            {issue.body}
           </span>
         </div>
       </div>

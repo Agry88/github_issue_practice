@@ -19,8 +19,15 @@ export default function Mainpage() {
       </Head>
       <Navbar />
       {/* gonna remove this when production finished IssueCard style */}
-      <main className="h-[1000px]">
-        <IssueCard />
+      <main className="h-[1000px] flex justify-center mt-10">
+
+        <ul className="h-auto overflow-y-auto">
+          {issueList.map((issue) => (
+            <li key={issue.issueId} className="mt-10 first:mt-0">
+              <IssueCard issue={issue} />
+            </li>
+          ))}
+        </ul>
       </main>
     </>
   );
