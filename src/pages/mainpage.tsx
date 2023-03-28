@@ -1,13 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
 import { UserContext } from '@/provider/userProvider';
 import Navbar from '@/components/Navbar';
 import IssueCard from '@/components/Card/issueCard';
+import Button from '@/components/Button';
+import { useRouter } from 'next/router';
+import TagDropdown from '@/components/Dropdown/TagDropdown';
 
 export default function Mainpage() {
+  const router = useRouter();
   const { issueList } = useIssue();
   const userData = useContext(UserContext);
+  const [isTagDropdownShow, setIsTagDropdownShow] = useState<boolean>(false);
+
+  const dropdownItems = [
+    {
+      name: 'Open',
+      onClick: () => console.log('Open clicked'),
+    },
+    {
+      name: 'In Progress',
+      onClick: () => console.log('In Progress clicked'),
+    },
+    {
+      name: 'Done',
+      onClick: () => console.log('Done clicked'),
+    },
+  ];
 
   return (
     <>
@@ -18,16 +38,38 @@ export default function Mainpage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      {/* gonna remove this when production finished IssueCard style */}
-      <main className="h-[1000px] flex justify-center mt-10">
+      <main className="flex flex-row justify-center w-full mt-4 overflow-y-hidden">
 
-        <ul className="h-auto overflow-y-auto">
-          {issueList.map((issue) => (
-            <li key={issue.issueId} className="mt-10 first:mt-0">
-              <IssueCard issue={issue} />
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-col w-[50vw]">
+
+          <div>
+            <Button classNames="w-fit h-10 bg-slate-200" onClick={() => router.push('/task/newTask')}>
+              add new Issue
+            </Button>
+          </div>
+
+          <div className="flex flex-row justify-between">
+            <Button classNames="w-fit h-10 bg-slate-200" onClick={() => setIsTagDropdownShow(true)}>
+              Tag
+            </Button>
+            <TagDropdown
+              isShow={isTagDropdownShow}
+              setIsShow={setIsTagDropdownShow}
+              tagDropdownItems={dropdownItems}
+            />
+            <div>
+              <span>Search</span>
+            </div>
+          </div>
+
+          <ul className="flex flex-col items-center w-full h-auto overflow-y-auto">
+            {issueList.map((issue) => (
+              <li key={issue.issueId} className="mt-10 first:mt-0 w-[60%]">
+                <IssueCard issue={issue} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </main>
     </>
   );

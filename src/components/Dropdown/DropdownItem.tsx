@@ -12,7 +12,7 @@ export default function DropDownItem({ children, isSelected, onClick }: DropDown
       <button
         type="button"
         onClick={onClick}
-        className={`w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white ${isSelected ? 'bg-gray-300' : ''}`}
+        className={`w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ${isSelected ? 'bg-gray-300' : ''}`}
       >
         {children}
       </button>
