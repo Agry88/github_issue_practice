@@ -20,7 +20,7 @@ export default function IssueCard({ issue, classNames }: CardProps) {
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
 
   return (
-    <Card classNames={`${classNames ?? ''}w-[20vw] min-w-[350px] h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}>
+    <Card classNames={`${classNames ?? ''}w-full h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}>
 
       <div className="flex flex-row justify-between w-full h-fit">
         <div>
