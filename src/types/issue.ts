@@ -1,3 +1,5 @@
+export type Tag = 'Open' | 'In Progress' | 'Closed';
+
 export type IssueTag = {
   tagId: number;
   tagName: string;
