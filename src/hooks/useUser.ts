@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { User } from '@/types/user';
 import handleLogin from '@/helpers/handleLogin';
+import useAccessToken from './useAccessToken';
 
 type UseUser = {
   user?: User,
@@ -13,24 +14,22 @@ export default function useUser(): UseUser {
   const [userData, setUserData] = useState<User>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
+  const accessToken = useAccessToken();
   const router = useRouter();
 
-  useEffect(() => {
-    const formattedAcessToken = localStorage.getItem('accessToken') ?? '';
-    if (formattedAcessToken === '' && router.pathname !== '/signup' && router.pathname !== '/redirect') {
-      router.push('/signup');
+  const handleAsyncLogin = async (token: string) => {
+    try {
+      const data = await handleLogin(token);
+      setUserData(data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsError(true);
     }
-    const handleAsyncLogin = async () => {
-      try {
-        const data = await handleLogin(formattedAcessToken);
-        setUserData(data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsError(true);
-      }
-    };
-    handleAsyncLogin();
-  }, [router]);
+  };
+
+  useEffect(() => {
+    if (accessToken !== undefined) handleAsyncLogin(accessToken);
+  }, [router, accessToken]);
 
   return {
     user: userData,
