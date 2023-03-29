@@ -17,8 +17,8 @@ export default function useUser(): UseUser {
 
   useEffect(() => {
     const formattedAcessToken = localStorage.getItem('accessToken') ?? '';
-    if (formattedAcessToken === '') {
-      router.push('/');
+    if (formattedAcessToken === '' && router.pathname !== '/signup' && router.pathname !== '/redirect') {
+      router.push('/signup');
     }
     const handleAsyncLogin = async () => {
       try {
