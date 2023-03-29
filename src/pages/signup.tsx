@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <a href={`https://github.com/login/oauth/authorize?client_id=${clientID}&amp;scope=read:user%20read:discussion&amp;redirect_uri=http://localhost:3000/api/oauth/github_redirect`}>
+        <a href={`https://github.com/login/oauth/authorize?client_id=${clientID}&amp;scope=read:user%20public_repo&amp;redirect_uri=http://localhost:3000/api/oauth/github_redirect`}>
           Connect to github
         </a>
       </main>
