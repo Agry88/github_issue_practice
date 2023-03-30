@@ -8,9 +8,9 @@ type Props = {
 
 export default function DropdownSearchInput({ handleToggleTag, handleSearchTag }: Props) {
   const [isDropdownShow, setIsDropdownShow] = useState<boolean>(false);
-  const [selectedTag, setSelectedTag] = useState<Tag>('Open');
+  const [selectedTag, setSelectedTag] = useState<Tag>('All');
   const textInputRef = useRef<HTMLInputElement>(null);
-  const arrayOfTags: Tag[] = ['Open', 'In Progress', 'Done'];
+  const arrayOfTags: Tag[] = ['All', 'Open', 'In Progress', 'Done'];
 
   return (
     <form className="relative w-full h-fit">
