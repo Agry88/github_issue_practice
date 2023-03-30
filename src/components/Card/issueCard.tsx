@@ -24,8 +24,12 @@ export default function IssueCard({ issue, classNames }: CardProps) {
 
       <div className="flex flex-row justify-between w-full h-fit">
         <div>
-          <button onClick={() => setisTagDropdownShow(true)} className="w-20 inline-block text-gray-500 hover:text-gray-50 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm p-1.5" type="button">
-            Tag
+          <button
+            onClick={() => setisTagDropdownShow(true)}
+            className="w-20 inline-block text-gray-500 hover:text-gray-50 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm p-1.5 min-w-fit whitespace-nowrap"
+            type="button"
+          >
+            {issue.tag.tagName}
           </button>
           <Dropdown isShow={isTagDropdownShow} setIsShow={setisTagDropdownShow}>
             <Dropdown.List>
