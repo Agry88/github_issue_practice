@@ -38,7 +38,7 @@ export default function Mainpage() {
       <Navbar />
       <main className="flex flex-row justify-center w-full mt-4">
 
-        <div className="flex flex-col w-[50vw]">
+        <div className="flex flex-col w-[50vw] gap-y-4">
 
           <div>
             <Button classNames="w-fit h-10 bg-slate-200" onClick={() => router.push('/task/newTask')}>
@@ -55,7 +55,7 @@ export default function Mainpage() {
 
           <ul
             onScroll={handleScroll}
-            className="flex flex-col items-center w-full max-h-screen overflow-y-scroll"
+            className="flex flex-col items-center w-full max-h-[65vh] overflow-y-scroll bg-gray-100"
           >
             {issueList.map((issue) => (
               <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
