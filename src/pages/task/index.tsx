@@ -19,6 +19,14 @@ export default function Mainpage() {
     console.log(str);
   };
 
+  const handleScroll = (e: React.UIEvent<HTMLUListElement>) => {
+    const element = e.currentTarget;
+    const bottom = element.scrollHeight - element.scrollTop === element.clientHeight;
+    if (bottom) {
+      console.log('bottom');
+    }
+  };
+
   return (
     <>
       <Head>
@@ -28,7 +36,7 @@ export default function Mainpage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <main className="flex flex-row justify-center w-full mt-4 overflow-y-hidden">
+      <main className="flex flex-row justify-center w-full mt-4">
 
         <div className="flex flex-col w-[50vw]">
 
@@ -45,7 +53,10 @@ export default function Mainpage() {
             />
           </div>
 
-          <ul className="flex flex-col items-center w-full h-auto overflow-y-auto">
+          <ul
+            onScroll={handleScroll}
+            className="flex flex-col items-center w-full max-h-screen overflow-y-scroll"
+          >
             {issueList.map((issue) => (
               <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
                 <IssueCard issue={issue} />
