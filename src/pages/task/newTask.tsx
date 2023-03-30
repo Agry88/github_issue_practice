@@ -5,14 +5,13 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import TextInput from '@/components/Input/textInput';
 import type { Tag } from '@/types/issue';
+import TagGroup from '@/components/Tag/TagGroup';
 import Label from '../../components/Input/Label';
 
 export default function NewTaskPage() {
   const router = useRouter();
   const accessToken = useAccessToken();
   const [selectedTag, setSelectedTag] = useState<Tag>('Open');
-
-  const tagArray: Tag[] = ['Open', 'In Progress', 'Closed'];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,24 +40,13 @@ export default function NewTaskPage() {
   return (
     <div className="flex flex-col items-center w-screen min-h-screen">
       <Navbar />
-      <div className="w-2/3 min-w-fit max-w-4xl h-fit mt-10">
-        <h1 className="text-4xl mb-10">New Task</h1>
+      <div className="w-2/3 max-w-4xl mt-10 min-w-fit h-fit">
+        <h1 className="mb-10 text-4xl">New Task</h1>
         <form className="w-full" onSubmit={handleSubmit}>
 
           <div className="mb-4">
             <Label label="Tag" />
-            <div className="inline-flex rounded-md shadow-sm" role="group">
-              {tagArray.map((name) => (
-                <button
-                  type="button"
-                  key={name}
-                  onClick={() => setSelectedTag(name)}
-                  className={`px-4 py-2 ${selectedTag === name ? 'bg-gray-900 text-white' : 'bg-transparent'} text-sm font-medium border border-gray-900 first:rounded-l-lg last:rounded-r-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white`}
-                >
-                  {name}
-                </button>
-              ))}
-            </div>
+            <TagGroup selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
           </div>
 
           <div className="mb-6">

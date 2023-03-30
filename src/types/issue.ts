@@ -1,4 +1,4 @@
-export type Tag = 'Open' | 'In Progress' | 'Closed';
+export type Tag = 'Open' | 'In Progress' | 'Done';
 
 export type IssueTag = {
   tagId: number;

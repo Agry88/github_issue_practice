@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (typeof accessToken !== 'string') res.status(403).json({ status: 'error', message: 'Invalid access token' });
     if (typeof title !== 'string') res.status(403).json({ status: 'error', message: 'Invalid title' });
     if (typeof comment !== 'string' || comment.length <= 30) res.status(403).json({ status: 'error', message: 'Invalid comment' });
-    if (label !== 'Open' && label !== 'In Progress' && label !== 'Closed') res.status(403).json({ status: 'error', message: 'Invalid label' });
+    if (label !== 'Open' && label !== 'In Progress' && label !== 'Done') res.status(403).json({ status: 'error', message: 'Invalid label' });
 
     const { createIssue } = GithubClient(accessToken);
     const response = await createIssue(title, comment, label);
