@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
 import Navbar from '@/components/Navbar';
 import IssueCard from '@/components/Card/issueCard';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
-import TagGroup from '@/components/Tag/TagGroup';
-import { Tag } from '@/types/issue';
+import DropdownSearchInput from '@/components/Input/DropdownSearchInput';
 
 export default function Mainpage() {
   const router = useRouter();
   const { issueList } = useIssue();
-  const [selectedTag, setSelectedTag] = useState<Tag>('Open');
+
+  const handleToggleTag = (tag: string) => {
+    console.log(tag);
+  };
+
+  const handleSearchTag = (str: string | null) => {
+    console.log(str);
+  };
 
   return (
     <>
@@ -33,10 +39,10 @@ export default function Mainpage() {
           </div>
 
           <div className="flex flex-row justify-between">
-            <TagGroup selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
-            <div>
-              <span>Search</span>
-            </div>
+            <DropdownSearchInput
+              handleToggleTag={handleToggleTag}
+              handleSearchTag={handleSearchTag}
+            />
           </div>
 
           <ul className="flex flex-col items-center w-full h-auto overflow-y-auto">
