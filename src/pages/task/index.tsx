@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
 import Navbar from '@/components/Navbar';
@@ -9,7 +9,8 @@ import DropdownSearchInput from '@/components/Input/DropdownSearchInput';
 
 export default function Mainpage() {
   const router = useRouter();
-  const { issueList } = useIssue();
+  const [page, setPage] = useState<number>(1);
+  const { issueList, isNoMoreIssue, isError } = useIssue(page);
 
   const handleToggleTag = (tag: string) => {
     console.log(tag);
@@ -22,8 +23,8 @@ export default function Mainpage() {
   const handleScroll = (e: React.UIEvent<HTMLUListElement>) => {
     const element = e.currentTarget;
     const bottom = element.scrollHeight - element.scrollTop === element.clientHeight;
-    if (bottom) {
-      console.log('bottom');
+    if (bottom && !isNoMoreIssue) {
+      setPage((prev) => prev + 1);
     }
   };
 
@@ -53,16 +54,26 @@ export default function Mainpage() {
             />
           </div>
 
-          <ul
-            onScroll={handleScroll}
-            className="flex flex-col items-center w-full max-h-[65vh] overflow-y-scroll bg-gray-100 py-10"
-          >
-            {issueList.map((issue) => (
-              <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
-                <IssueCard issue={issue} />
-              </li>
-            ))}
-          </ul>
+          {!isError
+            ? (
+              <ul
+                onScroll={handleScroll}
+                className="flex flex-col items-center w-full max-h-[65vh] overflow-y-scroll bg-gray-100 py-10"
+              >
+                {issueList.map((issue) => (
+                  <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
+                    {issue.issueId}
+                    <IssueCard issue={issue} />
+                  </li>
+                ))}
+              </ul>
+            )
+            : (
+              <div>
+                <h1 className="text-4xl">Some error has occured!</h1>
+                <span className="text-2xl">please take a screenshot of console, and notice Agry88 at github, Thx!</span>
+              </div>
+            )}
         </div>
       </main>
     </>
