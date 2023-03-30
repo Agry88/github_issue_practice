@@ -55,7 +55,7 @@ export default function Mainpage() {
 
           <ul
             onScroll={handleScroll}
-            className="flex flex-col items-center w-full max-h-[65vh] overflow-y-scroll bg-gray-100"
+            className="flex flex-col items-center w-full max-h-[65vh] overflow-y-scroll bg-gray-100 py-10"
           >
             {issueList.map((issue) => (
               <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
