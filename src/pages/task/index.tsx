@@ -5,27 +5,13 @@ import Navbar from '@/components/Navbar';
 import IssueCard from '@/components/Card/issueCard';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
-import TagDropdown from '@/components/Dropdown/TagDropdown';
+import TagGroup from '@/components/Tag/TagGroup';
+import { Tag } from '@/types/issue';
 
 export default function Mainpage() {
   const router = useRouter();
   const { issueList } = useIssue();
-  const [isTagDropdownShow, setIsTagDropdownShow] = useState<boolean>(false);
-
-  const dropdownItems = [
-    {
-      name: 'Open',
-      onClick: () => console.log('Open clicked'),
-    },
-    {
-      name: 'In Progress',
-      onClick: () => console.log('In Progress clicked'),
-    },
-    {
-      name: 'Done',
-      onClick: () => console.log('Done clicked'),
-    },
-  ];
+  const [selectedTag, setSelectedTag] = useState<Tag>('Open');
 
   return (
     <>
@@ -47,14 +33,7 @@ export default function Mainpage() {
           </div>
 
           <div className="flex flex-row justify-between">
-            <Button classNames="w-fit h-10 bg-slate-200" onClick={() => setIsTagDropdownShow(true)}>
-              Tag
-            </Button>
-            <TagDropdown
-              isShow={isTagDropdownShow}
-              setIsShow={setIsTagDropdownShow}
-              tagDropdownItems={dropdownItems}
-            />
+            <TagGroup selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
             <div>
               <span>Search</span>
             </div>
