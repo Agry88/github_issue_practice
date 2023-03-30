@@ -41,7 +41,7 @@ export default function Mainpage() {
 
           <ul className="flex flex-col items-center w-full h-auto overflow-y-auto">
             {issueList.map((issue) => (
-              <li key={issue.issueId} className="mt-10 first:mt-0 w-[60%]">
+              <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
                 <IssueCard issue={issue} />
               </li>
             ))}
