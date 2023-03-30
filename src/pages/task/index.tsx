@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
-import { UserContext } from '@/provider/userProvider';
 import Navbar from '@/components/Navbar';
 import IssueCard from '@/components/Card/issueCard';
 import Button from '@/components/Button';
@@ -11,7 +10,6 @@ import TagDropdown from '@/components/Dropdown/TagDropdown';
 export default function Mainpage() {
   const router = useRouter();
   const { issueList } = useIssue();
-  const userData = useContext(UserContext);
   const [isTagDropdownShow, setIsTagDropdownShow] = useState<boolean>(false);
 
   const dropdownItems = [
