@@ -43,7 +43,7 @@ export default function Mainpage() {
         <div className="flex flex-col w-[50vw] gap-y-4">
 
           <div>
-            <Button classNames="w-fit h-10 bg-slate-200" onClick={() => router.push('/task/newTask')}>
+            <Button classNames="w-fit h-10 bg-slate-200" onClick={() => router.push('/issue/newIssue')}>
               add new Issue
             </Button>
           </div>

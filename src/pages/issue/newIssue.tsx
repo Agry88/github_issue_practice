@@ -8,7 +8,7 @@ import type { Label } from '@/types/issue';
 import LabelGroup from '@/components/Label/LabelGroup';
 import LabelComponent from '../../components/Input/InputLabel';
 
-export default function NewTaskPage() {
+export default function NewIssuePage() {
   const router = useRouter();
   const accessToken = useAccessToken();
   const [selectedLabel, setSelectedLabel] = useState<Label>('Open');
@@ -33,7 +33,7 @@ export default function NewTaskPage() {
     });
 
     if (response.status === 201) {
-      router.push('/task');
+      router.push('/issue');
     }
   };
 
@@ -41,7 +41,7 @@ export default function NewTaskPage() {
     <div className="flex flex-col items-center w-screen min-h-screen">
       <Navbar />
       <div className="w-2/3 max-w-4xl mt-10 min-w-fit h-fit">
-        <h1 className="mb-10 text-4xl">New Task</h1>
+        <h1 className="mb-10 text-4xl">New Issue</h1>
         <form className="w-full" onSubmit={handleSubmit}>
 
           <div className="mb-4">
@@ -50,12 +50,12 @@ export default function NewTaskPage() {
           </div>
 
           <div className="mb-6">
-            <LabelComponent label="New Task Title">
+            <LabelComponent label="New Issue Title">
               <TextInput id="title" name="title" placeholder="New Issue Title" required />
             </LabelComponent>
           </div>
           <div className="mb-6">
-            <LabelComponent label="New Task Comment">
+            <LabelComponent label="New Issue Comment">
               <TextArea id="comment" name="comment" rows={5} placeholder="New Issue Comment" required />
             </LabelComponent>
           </div>
