@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Issue } from '@/types/issue';
+import { Issue, Label } from '@/types/issue';
 import Image from 'next/image';
 import Card from './index';
 import Dropdown from '../Dropdown/Dropdown';
@@ -7,15 +7,16 @@ import Dropdown from '../Dropdown/Dropdown';
 type CardProps = {
   issue: Issue
   classNames?: String
+  handleChangeIssueLabel: (issueNumber: number, newLabel: Label) => Promise<void>
 };
 
-const dropdownItem = [
+const dropdownItem: Label[] = [
   'Open',
   'In Progress',
   'Done',
 ];
 
-export default function IssueCard({ issue, classNames }: CardProps) {
+export default function IssueCard({ issue, classNames, handleChangeIssueLabel }: CardProps) {
   const [isLabelDropdownShow, setisLabelDropdownShow] = useState<boolean>(false);
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
 
@@ -34,7 +35,10 @@ export default function IssueCard({ issue, classNames }: CardProps) {
           <Dropdown isShow={isLabelDropdownShow} setIsShow={setisLabelDropdownShow}>
             <Dropdown.List>
               {dropdownItem.map((item) => (
-                <Dropdown.Item key={item}>
+                <Dropdown.Item
+                  key={item}
+                  onClick={() => handleChangeIssueLabel(issue.issueId, item)}
+                >
                   {item}
                 </Dropdown.Item>
               ))}

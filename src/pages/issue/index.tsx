@@ -13,7 +13,12 @@ export default function Mainpage() {
   const [page, setPage] = useState<number>(1);
   const [selectedLabel, setSelectedLabel] = useState<Label>('All');
   const [searchText, setSearchText] = useState<string>('');
-  const { issueList, isNoMoreIssue, isError } = useIssue(page, selectedLabel, searchText);
+  const {
+    issueList,
+    isNoMoreIssue,
+    isError,
+    handleChangeIssueLabel,
+  } = useIssue(page, selectedLabel, searchText);
   const scrollBarRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -65,7 +70,7 @@ export default function Mainpage() {
               >
                 {issueList.map((issue) => (
                   <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
-                    <IssueCard issue={issue} />
+                    <IssueCard issue={issue} handleChangeIssueLabel={handleChangeIssueLabel} />
                   </li>
                 ))}
               </ul>

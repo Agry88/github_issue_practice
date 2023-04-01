@@ -1,5 +1,6 @@
 import { Issue, Label } from '@/types/issue';
 import { useEffect, useState } from 'react';
+import useAccessToken from './useAccessToken';
 
 async function getListIssue(page: number, label: Label, searchText: string): Promise<Issue[]> {
   try {
@@ -20,7 +21,7 @@ async function getListIssue(page: number, label: Label, searchText: string): Pro
     const issueList: Issue[] = items.map((issue: any) => {
       if (issue.labels.length === 0) return null;
       return {
-        issueId: issue.id,
+        issueId: issue.number,
         title: issue.title,
         body: issue.body,
         label: issue.labels[0].name,
@@ -38,6 +39,7 @@ async function getListIssue(page: number, label: Label, searchText: string): Pro
 }
 
 export default function useIssue(page: number, label: Label, searchText: string) {
+  const accessToken = useAccessToken();
   const [issueList, setIssueList] = useState<Issue[]>([]);
   const [isNoMoreIssue, setIsNoMoreIssue] = useState<boolean>(false);
   const [isError, setisError] = useState<boolean>(false);
@@ -62,9 +64,39 @@ export default function useIssue(page: number, label: Label, searchText: string)
       });
   }, [page, label, searchText]);
 
+  const handleChangeIssueLabel = async (issueNumber: number, newLabel: Label) => {
+    try {
+      const response = await fetch('/api/changeIssueLabel', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          accessToken,
+          issueNumber,
+          label: newLabel,
+        }),
+      });
+      const { status } = response;
+      if (status !== 200) throw new Error('Error while changing issue');
+      setIssueList((prev) => prev.map((issue) => {
+        if (issue.issueId === issueNumber) {
+          return {
+            ...issue,
+            label: newLabel,
+          };
+        }
+        return issue;
+      }));
+    } catch {
+      setisError(true);
+    }
+  };
+
   return {
     issueList,
     isNoMoreIssue,
     isError,
+    handleChangeIssueLabel,
   };
 }

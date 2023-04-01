@@ -22,9 +22,9 @@ export default function GithubClient(token: string) {
     }
   };
 
-  const deleteIssueLabel = async (issueId: number, label: Label): Promise<Response> => {
+  const deleteAllIssueLabel = async (issueId: number): Promise<Response> => {
     try {
-      const response = await fetch(`${repoIssuesUrl}/${issueId}/labels/${label}`, {
+      const response = await fetch(`${repoIssuesUrl}/${issueId}/labels`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -44,7 +44,9 @@ export default function GithubClient(token: string) {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify([label]),
+        body: JSON.stringify({
+          labels: [label],
+        }),
       });
       return response;
     } catch (error) {
@@ -55,7 +57,7 @@ export default function GithubClient(token: string) {
 
   return {
     createIssue,
-    deleteIssueLabel,
+    deleteAllIssueLabel,
     addIssueLabel,
   };
 }
