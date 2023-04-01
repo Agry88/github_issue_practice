@@ -13,7 +13,7 @@ export default function DropdownSearchInput({ selectedTag, setSelectedTag, setSe
   const arrayOfTags: Tag[] = ['All', 'Open', 'In Progress', 'Done'];
 
   return (
-    <form className="relative w-full h-fit">
+    <form className="relative w-full h-fit" onSubmit={(e) => e.preventDefault()}>
       <div className="flex">
         <button
           className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
