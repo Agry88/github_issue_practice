@@ -1,7 +1,7 @@
-import { Tag } from '@/types/issue';
+import { Label } from '@/types/issue';
 
 export default function GithubClient(token: string) {
-  const createIssue = async (title: string, body: string, label: Tag): Promise<Response> => {
+  const createIssue = async (title: string, body: string, label: Label): Promise<Response> => {
     try {
       const response = await fetch('https://api.github.com/repos/Agry88/github_issue_practice/issues', {
         method: 'POST',

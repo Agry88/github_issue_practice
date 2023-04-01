@@ -1,16 +1,18 @@
-import { Tag } from '@/types/issue';
+import { Label } from '@/types/issue';
 import React, { useRef, useState } from 'react';
 
 type Props = {
-  selectedTag: Tag;
-  setSelectedTag: (tag: Tag) => void;
+  selectedLabel: Label;
+  setSelectedLabel: (label: Label) => void;
   setSearchText: (str: string) => void;
 };
 
-export default function DropdownSearchInput({ selectedTag, setSelectedTag, setSearchText }: Props) {
+export default function DropdownSearchInput({
+  selectedLabel, setSelectedLabel, setSearchText,
+}: Props) {
   const [isDropdownShow, setIsDropdownShow] = useState<boolean>(false);
   const textInputRef = useRef<HTMLInputElement>(null);
-  const arrayOfTags: Tag[] = ['All', 'Open', 'In Progress', 'Done'];
+  const arrayOfLabels: Label[] = ['All', 'Open', 'In Progress', 'Done'];
 
   return (
     <form className="relative w-full h-fit" onSubmit={(e) => e.preventDefault()}>
@@ -20,25 +22,25 @@ export default function DropdownSearchInput({ selectedTag, setSelectedTag, setSe
           type="button"
           onClick={() => setIsDropdownShow(!isDropdownShow)}
         >
-          {selectedTag}
+          {selectedLabel}
           <svg aria-hidden="true" className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
         </button>
         <div
           className={`z-10 translate-y-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ${isDropdownShow ? 'absolute' : 'hidden'}`}
         >
           <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-            {arrayOfTags.map((tag) => (
-              <li key={tag}>
+            {arrayOfLabels.map((label) => (
+              <li key={label}>
                 <button
                   type="button"
                   className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   onClick={() => {
-                    setSelectedTag(tag);
+                    setSelectedLabel(label);
                     setIsDropdownShow(false);
-                    setSelectedTag(tag);
+                    setSelectedLabel(label);
                   }}
                 >
-                  {tag}
+                  {label}
                 </button>
               </li>
             ))}

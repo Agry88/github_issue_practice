@@ -1,22 +1,24 @@
 import React from 'react';
 import Dropdown from './Dropdown';
 
-type TagDropdownItem = {
+type LabelDropdownItem = {
   name: string;
   onClick: () => void;
 };
 
-type TagDropdownProp = {
+type LabelDropdownProp = {
   isShow: boolean;
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>;
-  tagDropdownItems: TagDropdownItem[];
+  labelDropdownItems: LabelDropdownItem[];
 };
 
-export default function TagDropdown({ isShow, setIsShow, tagDropdownItems }: TagDropdownProp) {
+export default function LabelDropdown({
+  isShow, setIsShow, labelDropdownItems,
+}: LabelDropdownProp) {
   return (
     <Dropdown isShow={isShow} setIsShow={setIsShow}>
       <Dropdown.List>
-        {tagDropdownItems.map(({ name, onClick }) => (
+        {labelDropdownItems.map(({ name, onClick }) => (
           <Dropdown.Item key={name} onClick={onClick}>
             {name}
           </Dropdown.Item>

@@ -1,16 +1,10 @@
-export type Tag = 'All' | 'Open' | 'In Progress' | 'Done';
-
-export type IssueTag = {
-  tagId: number;
-  tagName: string;
-  tagColor: string;
-};
+export type Label = 'All' | 'Open' | 'In Progress' | 'Done';
 
 export type Issue = {
   issueId: number;
   title: string;
   body: string;
-  tag: IssueTag;
+  label: Label;
   creatorId: number;
   creatorName: string;
   creatorAvatar: string;

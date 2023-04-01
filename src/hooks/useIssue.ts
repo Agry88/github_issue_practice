@@ -1,7 +1,7 @@
-import { Issue, Tag } from '@/types/issue';
+import { Issue, Label } from '@/types/issue';
 import { useEffect, useState } from 'react';
 
-async function getListIssue(page: number, label: Tag, searchText: string): Promise<Issue[]> {
+async function getListIssue(page: number, label: Label, searchText: string): Promise<Issue[]> {
   try {
     const labelString = label === 'All' ? '' : `label:"${label}"`;
     const searchString = searchText === '' ? '' : `"${searchText}" in:title,body`;
@@ -23,11 +23,7 @@ async function getListIssue(page: number, label: Tag, searchText: string): Promi
         issueId: issue.id,
         title: issue.title,
         body: issue.body,
-        tag: {
-          tagId: issue.labels[0].id,
-          tagName: issue.labels[0].name,
-          tagColor: issue.labels[0].color,
-        },
+        label: issue.labels[0].name,
         creatorId: issue.user.id,
         creatorName: issue.user.login,
         creatorAvatar: issue.user.avatar_url,
@@ -41,7 +37,7 @@ async function getListIssue(page: number, label: Tag, searchText: string): Promi
   }
 }
 
-export default function useIssue(page: number, label: Tag, searchText: string) {
+export default function useIssue(page: number, label: Label, searchText: string) {
   const [issueList, setIssueList] = useState<Issue[]>([]);
   const [isNoMoreIssue, setIsNoMoreIssue] = useState<boolean>(false);
   const [isError, setisError] = useState<boolean>(false);

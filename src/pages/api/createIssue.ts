@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import GithubClient from '@/helpers/githubClient';
-import { Tag } from '@/types/issue';
+import { Label } from '@/types/issue';
 
 type Body = {
   accessToken: string;
   title: string;
   comment: string;
-  label: Tag;
+  label: Label;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {

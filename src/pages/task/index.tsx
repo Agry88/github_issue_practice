@@ -6,20 +6,20 @@ import IssueCard from '@/components/Card/issueCard';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
 import DropdownSearchInput from '@/components/Input/DropdownSearchInput';
-import { Tag } from '@/types/issue';
+import { Label } from '@/types/issue';
 
 export default function Mainpage() {
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
-  const [selectedTag, setSelectedTag] = useState<Tag>('All');
+  const [selectedLabel, setSelectedLabel] = useState<Label>('All');
   const [searchText, setSearchText] = useState<string>('');
-  const { issueList, isNoMoreIssue, isError } = useIssue(page, selectedTag, searchText);
+  const { issueList, isNoMoreIssue, isError } = useIssue(page, selectedLabel, searchText);
   const scrollBarRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     setPage(1);
     scrollBarRef.current?.scrollTo(0, 0);
-  }, [selectedTag, searchText]);
+  }, [selectedLabel, searchText]);
 
   const handleScroll = (e: React.UIEvent<HTMLUListElement>) => {
     const element = e.currentTarget;
@@ -50,8 +50,8 @@ export default function Mainpage() {
 
           <div className="flex flex-row justify-between">
             <DropdownSearchInput
-              selectedTag={selectedTag}
-              setSelectedTag={setSelectedTag}
+              selectedLabel={selectedLabel}
+              setSelectedLabel={setSelectedLabel}
               setSearchText={setSearchText}
             />
           </div>
