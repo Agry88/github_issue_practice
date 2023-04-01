@@ -2,13 +2,13 @@ import { Tag } from '@/types/issue';
 import React, { useRef, useState } from 'react';
 
 type Props = {
-  handleToggleTag: (tag: Tag) => void;
-  handleSearchTag: (text: string | null) => void;
+  selectedTag: Tag;
+  setSelectedTag: (tag: Tag) => void;
+  setSearchText: (str: string) => void;
 };
 
-export default function DropdownSearchInput({ handleToggleTag, handleSearchTag }: Props) {
+export default function DropdownSearchInput({ selectedTag, setSelectedTag, setSearchText }: Props) {
   const [isDropdownShow, setIsDropdownShow] = useState<boolean>(false);
-  const [selectedTag, setSelectedTag] = useState<Tag>('All');
   const textInputRef = useRef<HTMLInputElement>(null);
   const arrayOfTags: Tag[] = ['All', 'Open', 'In Progress', 'Done'];
 
@@ -35,7 +35,7 @@ export default function DropdownSearchInput({ handleToggleTag, handleSearchTag }
                   onClick={() => {
                     setSelectedTag(tag);
                     setIsDropdownShow(false);
-                    handleToggleTag(tag);
+                    setSelectedTag(tag);
                   }}
                 >
                   {tag}
@@ -49,7 +49,7 @@ export default function DropdownSearchInput({ handleToggleTag, handleSearchTag }
           <button
             type="button"
             className="absolute top-0 right-0 py-2.5 px-2 md:px-10 text-xs md:text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-            onClick={() => handleSearchTag(textInputRef.current?.value ?? null)}
+            onClick={() => setSearchText(textInputRef.current?.value ?? '')}
           >
             <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             <span className="sr-only">Search</span>

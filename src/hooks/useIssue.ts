@@ -1,12 +1,23 @@
-import { Issue } from '@/types/issue';
+import { Issue, Tag } from '@/types/issue';
 import { useEffect, useState } from 'react';
 
-async function getListIssue(page: number): Promise<Issue[]> {
+async function getListIssue(page: number, label: Tag, searchText: string): Promise<Issue[]> {
   try {
-    const response = await fetch(`https://api.github.com/repos/Agry88/github_issue_practice/issues?page=${page}&per_page=10`);
-    const data = await response.json();
+    const labelString = label === 'All' ? '' : `label:"${label}"`;
+    const searchString = searchText === '' ? '' : `"${searchText}" in:title,body`;
+    const queryString = `repo:Agry88/github_issue_practice is:open is:issue ${labelString} ${searchString}`;
+    const parameters = new URLSearchParams({
+      q: queryString,
+      sort: 'created',
+      order: 'desc',
+      per_page: '10',
+      page: `${page}`,
+    });
+    const response = await fetch(`https://api.github.com/search/issues?${parameters}`);
 
-    const issueList: Issue[] = data.map((issue: any) => {
+    const { items } = await response.json();
+
+    const issueList: Issue[] = items.map((issue: any) => {
       if (issue.labels.length === 0) return null;
       return {
         issueId: issue.id,
@@ -30,16 +41,22 @@ async function getListIssue(page: number): Promise<Issue[]> {
   }
 }
 
-export default function useIssue(page: number) {
+export default function useIssue(page: number, label: Tag, searchText: string) {
   const [issueList, setIssueList] = useState<Issue[]>([]);
   const [isNoMoreIssue, setIsNoMoreIssue] = useState<boolean>(false);
   const [isError, setisError] = useState<boolean>(false);
 
   useEffect(() => {
-    getListIssue(page)
+    setIssueList([]);
+    setIsNoMoreIssue(false);
+    setisError(false);
+  }, [label, searchText]);
+
+  useEffect(() => {
+    getListIssue(page, label, searchText)
       .then((issueListData: Issue[]) => {
         const filteredIssueListData = issueListData.filter((issue: Issue) => issue !== null);
-        if (filteredIssueListData.length === 0 || filteredIssueListData.length !== 10) {
+        if (filteredIssueListData.length === 0) {
           setIsNoMoreIssue(true);
         }
         setIssueList((prev) => [...prev, ...filteredIssueListData]);
@@ -47,7 +64,7 @@ export default function useIssue(page: number) {
       .catch(() => {
         setisError(true);
       });
-  }, [page]);
+  }, [page, label, searchText]);
 
   return {
     issueList,

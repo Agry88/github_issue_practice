@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
 import Navbar from '@/components/Navbar';
@@ -6,19 +6,20 @@ import IssueCard from '@/components/Card/issueCard';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
 import DropdownSearchInput from '@/components/Input/DropdownSearchInput';
+import { Tag } from '@/types/issue';
 
 export default function Mainpage() {
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
-  const { issueList, isNoMoreIssue, isError } = useIssue(page);
+  const [selectedTag, setSelectedTag] = useState<Tag>('All');
+  const [searchText, setSearchText] = useState<string>('');
+  const { issueList, isNoMoreIssue, isError } = useIssue(page, selectedTag, searchText);
+  const scrollBarRef = useRef<HTMLUListElement>(null);
 
-  const handleToggleTag = (tag: string) => {
-    console.log(tag);
-  };
-
-  const handleSearchTag = (str: string | null) => {
-    console.log(str);
-  };
+  useEffect(() => {
+    setPage(1);
+    scrollBarRef.current?.scrollTo(0, 0);
+  }, [selectedTag, searchText]);
 
   const handleScroll = (e: React.UIEvent<HTMLUListElement>) => {
     const element = e.currentTarget;
@@ -49,8 +50,9 @@ export default function Mainpage() {
 
           <div className="flex flex-row justify-between">
             <DropdownSearchInput
-              handleToggleTag={handleToggleTag}
-              handleSearchTag={handleSearchTag}
+              selectedTag={selectedTag}
+              setSelectedTag={setSelectedTag}
+              setSearchText={setSearchText}
             />
           </div>
 
@@ -58,11 +60,11 @@ export default function Mainpage() {
             ? (
               <ul
                 onScroll={handleScroll}
+                ref={scrollBarRef}
                 className="flex flex-col items-center w-full max-h-[65vh] overflow-y-scroll bg-gray-100 py-10"
               >
                 {issueList.map((issue) => (
                   <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
-                    {issue.issueId}
                     <IssueCard issue={issue} />
                   </li>
                 ))}
