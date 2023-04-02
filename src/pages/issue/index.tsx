@@ -18,6 +18,7 @@ export default function Mainpage() {
     isNoMoreIssue,
     isError,
     handleChangeIssueLabel,
+    handleCloseIssue,
   } = useIssue(page, selectedLabel, searchText);
   const scrollBarRef = useRef<HTMLUListElement>(null);
 
@@ -70,7 +71,11 @@ export default function Mainpage() {
               >
                 {issueList.map((issue) => (
                   <li key={issue.issueId} className="mt-10 first:mt-0 w-[80%]">
-                    <IssueCard issue={issue} handleChangeIssueLabel={handleChangeIssueLabel} />
+                    <IssueCard
+                      issue={issue}
+                      handleChangeIssueLabel={handleChangeIssueLabel}
+                      handleCloseIssue={handleCloseIssue}
+                    />
                   </li>
                 ))}
               </ul>

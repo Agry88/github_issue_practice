@@ -55,9 +55,28 @@ export default function GithubClient(token: string) {
     }
   };
 
+  const closeIssue = async (issueId: number): Promise<Response> => {
+    try {
+      const response = await fetch(`${repoIssuesUrl}/${issueId}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          state: 'closed',
+        }),
+      });
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Error closing issue');
+    }
+  };
+
   return {
     createIssue,
     deleteAllIssueLabel,
     addIssueLabel,
+    closeIssue,
   };
 }

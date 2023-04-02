@@ -8,6 +8,7 @@ type CardProps = {
   issue: Issue
   classNames?: String
   handleChangeIssueLabel: (issueNumber: number, newLabel: Label) => Promise<void>
+  handleCloseIssue: (issueNumber: number) => Promise<void>
 };
 
 const dropdownItem: Label[] = [
@@ -16,7 +17,9 @@ const dropdownItem: Label[] = [
   'Done',
 ];
 
-export default function IssueCard({ issue, classNames, handleChangeIssueLabel }: CardProps) {
+export default function IssueCard({
+  issue, classNames, handleChangeIssueLabel, handleCloseIssue,
+}: CardProps) {
   const [isLabelDropdownShow, setisLabelDropdownShow] = useState<boolean>(false);
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
 
@@ -55,7 +58,7 @@ export default function IssueCard({ issue, classNames, handleChangeIssueLabel }:
               <Dropdown.Item>
                 Edit
               </Dropdown.Item>
-              <Dropdown.Item>
+              <Dropdown.Item onClick={() => handleCloseIssue(issue.issueId)}>
                 Delete
               </Dropdown.Item>
             </Dropdown.List>

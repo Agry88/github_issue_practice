@@ -93,10 +93,31 @@ export default function useIssue(page: number, label: Label, searchText: string)
     }
   };
 
+  const handleCloseIssue = async (issueNumber: number) => {
+    try {
+      const response = await fetch('/api/closeIssue', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          accessToken,
+          issueNumber,
+        }),
+      });
+      const { status } = response;
+      if (status !== 200) throw new Error('Error while closing issue');
+      setIssueList((prev) => prev.filter((issue) => issue.issueId !== issueNumber));
+    } catch {
+      setisError(true);
+    }
+  };
+
   return {
     issueList,
     isNoMoreIssue,
     isError,
     handleChangeIssueLabel,
+    handleCloseIssue,
   };
 }
