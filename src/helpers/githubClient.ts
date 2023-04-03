@@ -1,5 +1,12 @@
 import { Label } from '@/types/issue';
 
+type UpdateIssueProps = {
+  title?: string;
+  body?: string;
+  label?: [Label];
+  state?: 'open' | 'closed';
+};
+
 export default function GithubClient(token: string) {
   const repoIssuesUrl = 'https://api.github.com/repos/Agry88/github_issue_practice/issues';
   const createIssue = async (title: string, body: string, label: Label): Promise<Response> => {
@@ -73,10 +80,29 @@ export default function GithubClient(token: string) {
     }
   };
 
+  const updateIssue = async (issueId: number, updateBody: UpdateIssueProps): Promise<Response> => {
+    try {
+      const response = await fetch(`${repoIssuesUrl}/${issueId}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          ...updateBody,
+        }),
+      });
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Error closing issue');
+    }
+  };
+
   return {
     createIssue,
     deleteAllIssueLabel,
     addIssueLabel,
     closeIssue,
+    updateIssue,
   };
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Issue, Label } from '@/types/issue';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import Card from './index';
 import Dropdown from '../Dropdown/Dropdown';
 
@@ -22,6 +23,7 @@ export default function IssueCard({
 }: CardProps) {
   const [isLabelDropdownShow, setisLabelDropdownShow] = useState<boolean>(false);
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
+  const router = useRouter();
 
   return (
     <Card classNames={`${classNames ?? ''}w-full h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}>
@@ -55,7 +57,7 @@ export default function IssueCard({
           </button>
           <Dropdown isShow={isOptionDropdownShow} setIsShow={setIsOptionDropdownShow}>
             <Dropdown.List>
-              <Dropdown.Item>
+              <Dropdown.Item onClick={() => router.push(`/issue/${issue.issueId}`)}>
                 Edit
               </Dropdown.Item>
               <Dropdown.Item onClick={() => handleCloseIssue(issue.issueId)}>
