@@ -8,7 +8,7 @@ export default function RedirectPage({ acessToken }: { acessToken: string }) {
 
   useEffect(() => {
     localStorage.setItem('accessToken', acessToken);
-    router.push('/issues');
+    router.push('/issue');
   }, [acessToken, router]);
 
   return (
