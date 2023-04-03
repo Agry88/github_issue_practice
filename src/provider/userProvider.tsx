@@ -22,7 +22,7 @@ export default function UserProvider({ children }: { children: React.ReactNode }
   const value: UserProvierValue = useMemo(() => ({
     isLoading,
     isError,
-    isLogin: true,
+    isLogin: !!user?.id,
     ...user,
   }), [user, isLoading, isError]);
 

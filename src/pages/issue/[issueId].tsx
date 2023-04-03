@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import TextArea from '@/components/Input/textArea';
 import useAccessToken from '@/hooks/useAccessToken';
 import { useRouter } from 'next/router';
@@ -58,7 +57,6 @@ export default function EditIssuePage() {
 
   return (
     <div className="flex flex-col items-center w-screen min-h-screen">
-      <Navbar />
       <div className="w-2/3 max-w-4xl mt-10 min-w-fit h-fit">
         <h1 className="mb-10 text-4xl">Update Issue</h1>
         {issue !== undefined ? (

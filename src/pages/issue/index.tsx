@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import useIssue from '@/hooks/useIssue';
-import Navbar from '@/components/Navbar';
 import IssueCard from '@/components/Card/issueCard';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
@@ -43,7 +42,6 @@ export default function Mainpage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
       <main className="flex flex-row justify-center w-full mt-4">
 
         <div className="flex flex-col w-[50vw] gap-y-4">

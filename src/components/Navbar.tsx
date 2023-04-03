@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function Navbar() {
   const router = useRouter();
-  const { user, isLoading } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
@@ -20,9 +20,10 @@ export default function Navbar() {
         className="flex flex-row items-center"
         onClick={() => router.push('/issue')}
       >
-        <div className="w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
-          {user && !isLoading
-            && <Image src={user.avatarURL} alt={user.name} width={50} height={50} />}
+        <div className="w-10 h-10 overflow-hidden bg-black rounded-full">
+          {(user?.avatarURL && localStorage.getItem('accessToken'))
+            ? <Image src={user.avatarURL} alt={user.name} width={50} height={50} />
+            : <Icon icon="mdi:github" color="white" fontSize={40} />}
         </div>
         <span className="font-sans text-3xl font-normal text-white">Github-Issues-practice</span>
       </button>
