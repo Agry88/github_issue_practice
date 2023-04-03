@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Icon } from '@iconify/react';
 import { useRouter } from 'next/router';
+import { UserContext } from '@/provider/userProvider';
+import Image from 'next/image';
 
 export default function Navbar() {
   const router = useRouter();
+  const { user, isLoading } = useContext(UserContext);
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
@@ -17,7 +20,10 @@ export default function Navbar() {
         className="flex flex-row items-center"
         onClick={() => router.push('/issue')}
       >
-        <Icon icon="mdi:github" color="white" fontSize={40} />
+        <div className="w-10 h-10 overflow-hidden bg-gray-200 rounded-full">
+          {user && !isLoading
+            && <Image src={user.avatarURL} alt={user.name} width={50} height={50} />}
+        </div>
         <span className="font-sans text-3xl font-normal text-white">Github-Issues-practice</span>
       </button>
       <button
