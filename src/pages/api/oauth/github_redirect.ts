@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   try {
     const requestToken = req.query.code;
-    const clientID = process.env.GITHUB_CLIENTID;
+    const clientID = process.env.NEXT_PUBLIC_GITHUB_CLIENTID;
     const clientSecret = process.env.GITHUB_CLIENT_SECRET;
     const response = await fetch(`https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`, {
       method: 'post',
