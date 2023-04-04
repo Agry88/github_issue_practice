@@ -84,12 +84,12 @@ export default function EditIssuePage() {
 
               <div className="mb-6">
                 <LabelComponent label="New Issue Title" description="Can't be empty">
-                  <TextInput id="title" name="title" placeholder={issue.title} required />
+                  <TextInput id="title" name="title" placeholder={issue.title} defaultValue={issue.title} required />
                 </LabelComponent>
               </div>
               <div className="mb-6">
                 <LabelComponent label="New Issue Comment" description="Length Can't less than 30">
-                  <TextArea id="comment" name="comment" rows={5} placeholder={issue.body} required />
+                  <TextArea id="comment" name="comment" rows={5} placeholder={issue.body} defaultValue={issue.body} required />
                 </LabelComponent>
               </div>
 
