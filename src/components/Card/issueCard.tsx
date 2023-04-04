@@ -51,11 +51,11 @@ export default function IssueCard({
           </Dropdown>
         </div>
 
-        <div>
+        <div className="relative">
           <button onClick={() => setIsOptionDropdownShow(true)} className="inline-block text-gray-500 hover:text-gray-50 hover:bg-gray-300 rounded-lg text-sm p-1.5" type="button">
             <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
           </button>
-          <Dropdown isShow={isOptionDropdownShow} setIsShow={setIsOptionDropdownShow}>
+          <Dropdown isShow={isOptionDropdownShow} setIsShow={setIsOptionDropdownShow} classNames="-translate-x-[90%]">
             <Dropdown.List>
               <Dropdown.Item onClick={() => router.push(`/issue/${issue.issueId}`)}>
                 Edit
