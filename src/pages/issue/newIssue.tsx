@@ -60,12 +60,12 @@ export default function NewIssuePage() {
           </div>
 
           <div className="mb-6">
-            <LabelComponent label="New Issue Title">
+            <LabelComponent label="New Issue Title" description="Can't be empty">
               <TextInput id="title" name="title" placeholder="New Issue Title" required />
             </LabelComponent>
           </div>
           <div className="mb-6">
-            <LabelComponent label="New Issue Comment">
+            <LabelComponent label="New Issue Comment" description="Length Can't less than 30">
               <TextArea id="comment" name="comment" rows={5} placeholder="New Issue Comment" required />
             </LabelComponent>
           </div>
