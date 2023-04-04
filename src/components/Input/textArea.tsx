@@ -5,7 +5,7 @@ type Props = {
   name?: string;
   rows?: number;
   placeholder?: string;
-  defaultValue: string
+  defaultValue?: string
   required?: boolean;
 };
 
