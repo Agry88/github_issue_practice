@@ -25,7 +25,7 @@ export default function Navbar() {
             ? <Image src={user.avatarURL} alt={user.name} width={50} height={50} />
             : <Icon icon="mdi:github" color="white" fontSize={40} />}
         </div>
-        <span className="font-sans text-3xl font-normal text-white">Github-Issues-practice</span>
+        <span className="hidden font-sans font-normal text-white sm:block sm:text-xl md:text-3xl">Github-Issues-practice</span>
       </button>
       <button
         type="button"
@@ -33,7 +33,7 @@ export default function Navbar() {
         onClick={handleLogout}
       >
         <Icon icon="material-symbols:logout" color="white" fontSize={40} />
-        <span className="font-sans text-2xl font-normal text-white">Logout</span>
+        <span className="font-sans font-normal text-white sm:block sm:text-xl md:text-2xl">Logout</span>
       </button>
     </nav>
   );
