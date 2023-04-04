@@ -42,9 +42,12 @@ export default function GithubClient(token: string) {
         body: JSON.stringify({
           title,
           body,
-          labels: [label],
         }),
       });
+
+      const { number } = await response.json();
+      await updateIssueLabelWithAdminToken(number, label);
+
       return response;
     } catch (error) {
       console.error(error);
