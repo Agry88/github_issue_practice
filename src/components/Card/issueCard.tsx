@@ -29,7 +29,7 @@ export default function IssueCard({
     <Card classNames={`${classNames ?? ''}w-full h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}>
 
       <div className="flex flex-row justify-between w-full h-fit">
-        <div>
+        <div className="relative">
           <button
             onClick={() => setisLabelDropdownShow(true)}
             className="w-20 inline-block text-gray-500 hover:text-gray-50 bg-gray-200 hover:bg-gray-300 rounded-lg text-sm p-1.5 min-w-fit whitespace-nowrap"
