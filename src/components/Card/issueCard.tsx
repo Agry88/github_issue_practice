@@ -81,7 +81,7 @@ export default function IssueCard({
 
         <div className="w-full h-full">
           <span className="font-sans text-base font-semibold tracking-normal text-left break-all">
-            {issue.body}
+            {issue.body.length > 30 ? `${issue.body.substring(0, 30)}...` : issue.body}
           </span>
         </div>
       </div>
