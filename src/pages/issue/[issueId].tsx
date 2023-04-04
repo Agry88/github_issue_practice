@@ -57,8 +57,8 @@ export default function EditIssuePage() {
 
   return (
     <div className="flex flex-col items-center w-screen min-h-screen">
-      <div className="w-2/3 max-w-4xl mt-10 min-w-fit h-fit">
-        <h1 className="mb-10 text-4xl">Update Issue</h1>
+      <div className="w-2/3 max-w-4xl mt-4 min-w-fit h-fit">
+        <h1 className="mb-4 text-4xl">Update Issue</h1>
         {issue !== undefined ? (
           <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -70,12 +70,12 @@ export default function EditIssuePage() {
             </div>
 
             <div className="mb-6">
-              <LabelComponent label="New Issue Title">
+              <LabelComponent label="New Issue Title" description="Can't be empty">
                 <TextInput id="title" name="title" placeholder={issue.title} required />
               </LabelComponent>
             </div>
             <div className="mb-6">
-              <LabelComponent label="New Issue Comment">
+              <LabelComponent label="New Issue Comment" description="Length Can't less than 30">
                 <TextArea id="comment" name="comment" rows={5} placeholder={issue.body} required />
               </LabelComponent>
             </div>
