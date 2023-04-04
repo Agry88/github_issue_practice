@@ -52,39 +52,6 @@ export default function GithubClient(token: string) {
     }
   };
 
-  const deleteAllIssueLabel = async (issueId: number): Promise<Response> => {
-    try {
-      const response = await fetch(`${repoIssuesUrl}/${issueId}/labels`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response;
-    } catch (error) {
-      console.error(error);
-      throw new Error('Error deleting issue label');
-    }
-  };
-
-  const addIssueLabel = async (issueId: number, label: Label): Promise<Response> => {
-    try {
-      const response = await fetch(`${repoIssuesUrl}/${issueId}/labels`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          labels: [label],
-        }),
-      });
-      return response;
-    } catch (error) {
-      console.error(error);
-      throw new Error('Error adding issue label');
-    }
-  };
-
   const closeIssue = async (issueId: number): Promise<Response> => {
     try {
       const response = await fetch(`${repoIssuesUrl}/${issueId}`, {
@@ -129,8 +96,6 @@ export default function GithubClient(token: string) {
 
   return {
     createIssue,
-    deleteAllIssueLabel,
-    addIssueLabel,
     closeIssue,
     updateIssue,
     updateIssueLabelWithAdminToken,
