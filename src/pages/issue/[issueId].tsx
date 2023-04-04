@@ -1,17 +1,19 @@
 import TextArea from '@/components/Input/textArea';
 import useAccessToken from '@/hooks/useAccessToken';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TextInput from '@/components/Input/textInput';
 import { Issue, type Label } from '@/types/issue';
 import LabelGroup from '@/components/Label/LabelGroup';
 import fineOneIssue from '@/helpers/findOneIssue';
+import { AlertContext } from '@/provider/alertProvider';
 import LabelComponent from '../../components/Input/InputLabel';
 
 export default function EditIssuePage() {
   const router = useRouter();
   const accessToken = useAccessToken();
   const [issue, setIssue] = useState<Issue>();
+  const { show } = useContext(AlertContext);
   const { issueId } = router.query;
 
   useEffect(() => {
@@ -35,7 +37,13 @@ export default function EditIssuePage() {
     const title = formData.get('title');
     const comment = formData.get('comment');
 
-    if (title === null || comment === null) {
+    if (!title || !comment) {
+      show('Error', 'Please fill in all the fields', 'error');
+      return;
+    }
+
+    if (comment.length < 30) {
+      show('Error', 'Comment must be at least 30 characters', 'error');
       return;
     }
 

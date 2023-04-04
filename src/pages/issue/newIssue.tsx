@@ -1,22 +1,34 @@
 import TextArea from '@/components/Input/textArea';
 import useAccessToken from '@/hooks/useAccessToken';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import TextInput from '@/components/Input/textInput';
 import type { Label } from '@/types/issue';
 import LabelGroup from '@/components/Label/LabelGroup';
+import { AlertContext } from '@/provider/alertProvider';
 import LabelComponent from '../../components/Input/InputLabel';
 
 export default function NewIssuePage() {
   const router = useRouter();
   const accessToken = useAccessToken();
   const [selectedLabel, setSelectedLabel] = useState<Label>('Open');
+  const { show } = useContext(AlertContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const title = formData.get('title');
     const comment = formData.get('comment');
+
+    if (!title || !comment) {
+      show('Error', 'Please fill in all the fields', 'error');
+      return;
+    }
+
+    if (comment.length < 30) {
+      show('Error', 'Comment must be at least 30 characters', 'error');
+      return;
+    }
 
     const response = await fetch('/api/createIssue', {
       method: 'POST',
