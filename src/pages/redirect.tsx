@@ -32,7 +32,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (formattedAcessToken === '') {
     return {
       redirect: {
-        destination: '/',
+        destination: '/issue',
         permanent: false,
       },
     };
