@@ -18,13 +18,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (typeof issueNumber !== 'number') res.status(403).json({ status: 'error', message: 'Invalid issueNumber' });
     if (label !== 'Open' && label !== 'In Progress' && label !== 'Done') res.status(403).json({ status: 'error', message: 'Invalid label' });
 
-    const { deleteAllIssueLabel, addIssueLabel } = GithubClient(accessToken);
-    const deleteResponse = await deleteAllIssueLabel(issueNumber);
-    const { status: deleteStatus } = deleteResponse;
-    if (deleteStatus !== 204) res.status(500).json({ status: 'error', message: 'Error while changing issue' });
+    const { updateIssueLabelWithAdminToken } = GithubClient(accessToken);
 
-    const addLabelResponse = await addIssueLabel(issueNumber, label);
-    const { status } = addLabelResponse;
+    const response = await updateIssueLabelWithAdminToken(issueNumber, label);
+
+    const { status } = response;
 
     if (status !== 200) res.status(500).json({ status: 'error', message: 'Error while changing issue' });
 
