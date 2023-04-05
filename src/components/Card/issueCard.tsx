@@ -25,13 +25,17 @@ export default function IssueCard({
 }: CardProps) {
   const [isLabelDropdownShow, setisLabelDropdownShow] = useState<boolean>(false);
   const [isOptionDropdownShow, setIsOptionDropdownShow] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const router = useRouter();
   const { user } = useContext(UserContext);
   const { show } = useContext(AlertContext);
   const isCreator = user?.id === issue.creatorId;
 
   return (
-    <Card classNames={`${classNames ?? ''}w-full h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}>
+    <Card
+      classNames={`${classNames ?? ''}w-full h-fit bg-blue-50 transition-all shadow-lg hover:shadow-2xl`}
+      onClick={() => setIsExpanded((prev) => !prev)}
+    >
 
       <div className="flex flex-row justify-between w-full h-fit">
         <div className="relative">
@@ -88,9 +92,9 @@ export default function IssueCard({
           </span>
         </div>
 
-        <div className="w-full h-full">
+        <div className="w-full h-full text-left">
           <span className="font-sans text-base font-semibold tracking-normal text-left break-all">
-            {issue.body.length > 30 ? `${issue.body.substring(0, 30)}...` : issue.body}
+            {(issue.body.length > 30 && !isExpanded) ? `${issue.body.substring(0, 30)}...` : issue.body}
           </span>
         </div>
       </div>
