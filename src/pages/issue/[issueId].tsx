@@ -62,6 +62,8 @@ export default function EditIssuePage() {
     if (response.status === 200) {
       router.push('/issue');
     }
+
+    show('Success', 'Issue Updated', 'success');
   };
 
   return (

@@ -1,5 +1,6 @@
 import { Issue, Label } from '@/types/issue';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AlertContext } from '@/provider/alertProvider';
 import useAccessToken from './useAccessToken';
 
 async function getListIssue(page: number, label: Label, searchText: string): Promise<Issue[]> {
@@ -43,6 +44,7 @@ export default function useIssue(page: number, label: Label, searchText: string)
   const [issueList, setIssueList] = useState<Issue[]>([]);
   const [isNoMoreIssue, setIsNoMoreIssue] = useState<boolean>(false);
   const [isError, setisError] = useState<boolean>(false);
+  const { show } = useContext(AlertContext);
 
   useEffect(() => {
     setIssueList([]);
@@ -88,8 +90,10 @@ export default function useIssue(page: number, label: Label, searchText: string)
         }
         return issue;
       }));
+      show('Label changed successfully', 'The label in git hub has been changed successfully', 'success');
     } catch {
       setisError(true);
+      show('Label changed failed', 'Error while changing label', 'error');
     }
   };
 
@@ -108,8 +112,10 @@ export default function useIssue(page: number, label: Label, searchText: string)
       const { status } = response;
       if (status !== 200) throw new Error('Error while closing issue');
       setIssueList((prev) => prev.filter((issue) => issue.issueId !== issueNumber));
+      show('Issue closed successfully', 'The issue in git hub has been closed successfully', 'success');
     } catch {
       setisError(true);
+      show('Issue closed failed', 'Error while closing issue', 'error');
     }
   };
 

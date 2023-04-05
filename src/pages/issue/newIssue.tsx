@@ -47,6 +47,7 @@ export default function NewIssuePage() {
     if (response.status === 201) {
       router.push('/issue');
     }
+    show('Success', 'Issue Created', 'success');
   };
 
   return (
