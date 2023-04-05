@@ -1,9 +1,15 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import useAccessToken from '@/hooks/useAccessToken';
 
 export default function NotFoundPage() {
   const router = useRouter();
+  const accessToken = useAccessToken();
+
+  useEffect(() => {
+    if (accessToken !== '') router.push('/issue');
+  }, [accessToken, router]);
 
   return (
     <>
