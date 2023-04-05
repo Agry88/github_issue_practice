@@ -33,26 +33,31 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Pages
 
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/97928357/229948440-a06788df-7276-4b4d-88ac-ae1e735b3849.png">
 #### SignUp
 The SignUp page is the first page that the user sees. 
 The user is redirected to the GitHub OAuth page to authenticate.
 After the user is authenticated, the user is redirected to the redirect page.
 
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/97928357/229948470-8e669b16-8b09-486a-9d2a-c64837e4928f.png">
 #### Redirect
 The Redirect page is the page that the user is redirected to after the user is authenticated.
 This Page is used to get the access token from the GitHub OAuth page and save it in the localStorage.
 
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/97928357/229948505-8cc083d2-6029-4ad6-8bae-56484bfa9e10.png">
 #### Issue
 The Issue page is the page that the user sees after the user is authenticated.
 This page is used to display the issues in the repository.
 User can create, edit, and delete the issues.
 But the user can only edit and delete the issues that the user created.
 
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/97928357/229948528-65c9d17d-f63d-449d-bf3f-c5a6f11b3999.png">
 #### Issue/[id]
 The Issue/[id] page is the page that the user sees after the user clicks the edit button of the issue.
 This page is used to display the issue details of the issue.
 User can edit the issue details.
 
+<img width="1438" alt="image" src="https://user-images.githubusercontent.com/97928357/229948542-e68cc9a7-355a-4bdc-8f6a-a165542fbe6d.png">
 #### Issue/newIssue
 The Issue/newIssue page is the page that the user sees after the user clicks the add new issue button from Issue Page.
 This page is used to create the new issue.
