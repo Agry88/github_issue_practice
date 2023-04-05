@@ -1,4 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project that manage the issues in this repository.
+The app is used to apply for Dcard's 2023 web frontend intern position.
+
+## Project Requirement
+View the [project requirement](https://drive.google.com/file/d/1ZlwuUafAQUKBEA_ZK6ShM5F4xLTkV_4X/view) for more information.
 
 ## Getting Started
 
@@ -32,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 #### SignUp
 The SignUp page is the first page that the user sees. 
 The user is redirected to the GitHub OAuth page to authenticate.
- After the user is authenticated, the user is redirected to the redirect page.
+After the user is authenticated, the user is redirected to the redirect page.
 
 #### Redirect
 The Redirect page is the page that the user is redirected to after the user is authenticated.
